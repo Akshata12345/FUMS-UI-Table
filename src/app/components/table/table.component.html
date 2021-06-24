@@ -1,0 +1,21 @@
+<table border="1">
+    <tr>
+        <th>totalPassengers</th>
+        <th>totalPages</th>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Trips</th>
+        <th>AirName</th>
+        <th>Slogan</th>
+    </tr>
+    <tr *ngFor = "let details of details" >
+        <td>{{this.userData.totalPassengers}}</td>
+        <td>{{this.userData.totalPages}}</td>
+        <td>{{details._id}}</td>
+        <td>{{details.name}}</td>
+        <td>{{details.trips}}</td>
+        <td>{{details.airline.name}}</td>
+        <td>{{details.airline.slogan}}</td>
+    </tr>
+    
+</table>
