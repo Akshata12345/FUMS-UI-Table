@@ -1,0 +1,16 @@
+*{
+    padding:2px;
+}
+table {
+    font-weight:500;
+    width: 100%;
+    background-color:whitesmoke;
+}
+
+th{
+    font-weight: 700;
+}
+.example-container {
+  height: 400px;
+  overflow: auto;
+}

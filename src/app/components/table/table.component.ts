@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ApiService } from 'src/app/services/api.service';
-
+import { MatSort } from '@angular/material/sort';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
 @Component({
   selector: 'app-table',
   templateUrl: './table.component.html',
@@ -8,25 +10,38 @@ import { ApiService } from 'src/app/services/api.service';
 })
 export class TableComponent implements OnInit {
 
+  displayedColumns: string[] = ['Id','trips', 'airName','country','slogan','established'];
   userData:any = [];
-  details:any = [];
+  //details:any = [];
+  details: MatTableDataSource<any>;
   
+  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  searchKey: string;
  
-  constructor( private apiService: ApiService ) { 
 
-    this.apiService.getDetails().subscribe(res => {
+  constructor( private apiService: ApiService) { }
+  
+  ngOnInit(): void {
+      this.apiService.getDetails().subscribe(res => {
       this.userData = res ; 
-      this.details = this.userData["data"];
-
+      this.details = new MatTableDataSource(this.userData["data"]);
+      //this.details = this.userData["data"];
+      this.details.sort = this.sort;
+      this.details.paginator = this.paginator;
+      
       console.log(this.userData)
       console.log(this.details)
-      
     });
-    
   }
 
-  ngOnInit(): void {
-    
+  onSearchClear() {
+    this.searchKey = "";
+    this.applyFilter();
+  }
+
+  applyFilter() {
+    this.details.filter = this.searchKey.trim().toLowerCase();
   }
 
 }

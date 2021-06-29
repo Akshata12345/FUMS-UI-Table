@@ -1,21 +1,50 @@
-<table border="1">
-    <tr>
-        <th>totalPassengers</th>
-        <th>totalPages</th>
-        <th>ID</th>
-        <th>Name</th>
-        <th>Trips</th>
-        <th>AirName</th>
-        <th>Slogan</th>
-    </tr>
-    <tr *ngFor = "let details of details" >
-        <td>{{this.userData.totalPassengers}}</td>
-        <td>{{this.userData.totalPages}}</td>
-        <td>{{details._id}}</td>
-        <td>{{details.name}}</td>
-        <td>{{details.trips}}</td>
-        <td>{{details.airline.name}}</td>
-        <td>{{details.airline.slogan}}</td>
-    </tr>
+<div>
+  <mat-form-field class="search-form-field" floatLabel="never">
+    <input matInput [(ngModel)]="searchKey" placeholder="Search" autocomplete="off" (keyup)="applyFilter()">
+    <button mat-button matSuffix mat-icon-button aria-label="Clear"*ngIf="searchKey" (click)="onSearchClear()">
+      <mat-icon>close</mat-icon>
+    </button>
+    </mat-form-field>
+</div>
+
+<div  class="example-container mat-elevation-z8">
+  <table mat-table [dataSource]="details"  matSort >
+      
+    <ng-container matColumnDef="Id">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Id </th>
+        <td mat-cell *matCellDef="let details"> {{details.airline.id}} </td>
+      </ng-container>
     
-</table>
+  
+      <ng-container matColumnDef="trips">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Trips </th>
+        <td mat-cell *matCellDef="let details"> {{details.trips}} </td>
+      </ng-container>
+    
+    
+      <ng-container matColumnDef="airName">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> AirName </th>
+        <td mat-cell *matCellDef="let details"> {{details.airline.name}} </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="country">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Country </th>
+          <td mat-cell *matCellDef="let details"> {{details.airline.country}} </td>
+        </ng-container>
+  
+        <ng-container matColumnDef="slogan">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Slogan </th>
+          <td mat-cell *matCellDef="let details"> {{details.airline.slogan}} </td>
+        </ng-container>
+  
+        <ng-container matColumnDef="established">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Established </th>
+          <td mat-cell *matCellDef="let details"> {{details.airline.established}} </td>
+        </ng-container>
+   
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    <mat-paginator [pageSizeOptions]="[5,10,25,100]" [pageSize]="5" showFirstLastButtons></mat-paginator>
+   
+  </div>
