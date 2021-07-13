@@ -1,3 +1,8 @@
+.fill-remaining-space {
+    /* This fills the remaining space, by using flexbox. 
+       Every toolbar row uses a flexbox row layout. */
+    flex: 1 1 auto;
+}
 *{
     padding:2px;
 }
@@ -11,6 +16,20 @@ th{
     font-weight: 700;
 }
 .example-container {
-  height: 400px;
+  height: 350px;
   overflow: auto;
+  background-color: whitesmoke;
+}
+.mat-row:last-child td {
+    border-bottom: none;
+}
+  
+.mat-footer-row:first-child td {
+    border-top: 1px solid rgba(0, 0, 0, 0.12);
+}
+  
+.mat-footer-cell .mat-paginator {
+    margin-left: -24px;
+    margin-right: -24px;
+    background-color: whitesmoke;
 }

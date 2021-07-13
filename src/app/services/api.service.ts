@@ -6,11 +6,13 @@ import { HttpClient } from '@angular/common/http'
 })
 export class ApiService {
 
-  url = "https://api.instantwebtools.net/v1/passenger?page=0&size=10"
+  url = "https://api.instantwebtools.net/v1/passenger?page=";
+  
 
   constructor( private http : HttpClient ) { }
 
   getDetails () {
     return this.http.get(this.url)
   }
+  
 }
